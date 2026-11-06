@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the archived software release and the associated research article when available."
+type: software
+title: "Motion-Driven Closed-Loop Regulation Under Partial Observability"
+abstract: "Frozen synthetic state-motion simulation, causal motion-derived estimation, resource-constrained closed-loop regulation, matched oracle evaluation, and reproducibility tools."
+authors:
+  - family-names: Rehman
+    given-names: Abdul
+repository-code: "https://github.com/AbdulRehman88/Multimodal-VR-Closed-Loop-Regulation"
+license: MIT
+keywords:
+  - virtual reality
+  - synthetic simulation
+  - closed-loop control
+  - motion-derived state estimation
+  - partial observability
+  - reproducible research
