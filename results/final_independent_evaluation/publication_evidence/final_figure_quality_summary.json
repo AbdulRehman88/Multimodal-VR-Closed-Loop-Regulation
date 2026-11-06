@@ -1,0 +1,17 @@
+{
+  "figures": 8,
+  "pdfs": 8,
+  "pngs": 8,
+  "all_dpi_pass": true,
+  "pdf_inspector_available": false,
+  "provenance_hashes_verified": true,
+  "primary_independent_profiles": 200,
+  "development_ablation_profiles": 20,
+  "F5_outside_display_range": 5,
+  "issues": [
+    "F5: Histogram bounds omit 5 of 400 profile-condition recovery effects."
+  ],
+  "visual_100_percent_inspection_completed": false,
+  "new_simulations": false,
+  "model_or_controller_modified": false
+}

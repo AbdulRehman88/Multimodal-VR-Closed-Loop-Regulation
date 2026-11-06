@@ -1,0 +1,23 @@
+SCIENTIFIC INTERPRETATION
+=========================
+
+1. Position and velocity are SIMULATED motion signals.
+2. Speed is derived from simulated velocity.
+3. The state in Panel C is a SIMULATED hidden state.
+   It is available only for retrospective evaluation,
+   NOT as an input to the AI estimator.
+4. The highlighted interval is the initial causal
+   observation window through sample index 89.
+5. The first permitted control action is at 1.0 s.
+6. Wrong-direction markers represent actual stimulus
+   changes counter to the current hidden-state excursion.
+7. Confidence values are uncalibrated classifier outputs.
+8. Figure selection is explicitly recorded in CSV.
+9. The adverse episode was selected retrospectively
+   for explanation, not estimator/controller tuning.
+10. No EEG, heart-rate, pupil, physiological recording,
+    or human-participant measurement is depicted.
+11. Motion position and speed use simulator-defined,
+    arbitrary units; no physical calibration is claimed.
+12. All time series were deterministically replayed
+    against the locked independent evaluation metrics.

@@ -1,0 +1,52 @@
+{
+  "artifact_type": "diagnostic_ai_controller_baseline",
+  "created_utc": "2026-11-05T02:14:59.292478+00:00",
+  "training_profiles": 60,
+  "training_windows": 13320,
+  "training_source": "results\\motion_state_dataset\\development_windows.csv",
+  "training_source_sha256": "f4e5f898b66bba7cd1fe0f24d83c856a9a679d17e692e2913319bd02ba358797",
+  "feature_names": [
+    "speed_mean",
+    "speed_std",
+    "speed_max",
+    "speed_q90",
+    "speed_rms",
+    "acceleration_mean",
+    "acceleration_std",
+    "acceleration_q90",
+    "velocity_x_std",
+    "velocity_y_std",
+    "velocity_z_std",
+    "position_x_std",
+    "position_y_std",
+    "position_z_std",
+    "time_s"
+  ],
+  "feature_count": 15,
+  "sampling_rate_hz": 90,
+  "control_rate_hz": 10,
+  "observation_window_s": 1.0,
+  "first_feature_sample_index": 89,
+  "first_eligible_control_sample": 90,
+  "target_classes": {
+    "0": "Low: state < 4",
+    "1": "Regulated: 4 <= state <= 6",
+    "2": "Elevated: state > 6"
+  },
+  "estimator": "StandardScaler + LogisticRegression",
+  "class_weight": null,
+  "C": 1.0,
+  "random_state": 2026,
+  "model_sha256": "1884007ac6581b6653c3227e464256b5ccc56c1e30acf847f543371312f36467",
+  "model_role": "fixed experimental baseline",
+  "validation_used_for_fitting": false,
+  "independent_test_used": false,
+  "closed_loop_evaluated": false,
+  "known_limitations": [
+    "Trained only on neutral-control trajectories",
+    "Elapsed time may encode recovery-schedule shortcuts",
+    "Initial opposite-direction predictions remain",
+    "Probabilities have not been calibrated",
+    "No closed-loop effectiveness established"
+  ]
+}

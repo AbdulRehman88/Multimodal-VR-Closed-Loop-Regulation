@@ -1,0 +1,47 @@
+{
+  "protocol_sha256": "ba193b21e6e990489e395c91b72a8c0eabbba8a61af8f1c5165a52bb30df0008",
+  "frozen_model_sha256": "1884007ac6581b6653c3227e464256b5ccc56c1e30acf847f543371312f36467",
+  "profiles": 200,
+  "test_episodes": 400,
+  "policy_episode_records": 1200,
+  "bootstrap_replicates": 10000,
+  "adverse_episodes": 65,
+  "opposite_direction_actions": 745,
+  "reserve_boundary_episodes": 373,
+  "primary_effects": {
+    "ai_minus_neutral_recovery_s": {
+      "estimate": -0.22558333333333333,
+      "CI_low": -0.2607798611111111,
+      "CI_high": -0.19227708333333335
+    },
+    "ai_minus_neutral_stability_pp": {
+      "estimate": 1.8798611111111114,
+      "CI_low": 1.5997627314814815,
+      "CI_high": 2.158796296296296
+    },
+    "ai_minus_oracle_recovery_s": {
+      "estimate": 0.14183333333333334,
+      "CI_low": 0.11458333333333334,
+      "CI_high": 0.17125
+    }
+  },
+  "regression_tests_passed": true,
+  "new_simulations": false,
+  "model_retraining": false,
+  "controller_tuning": false,
+  "human_validation": false,
+  "physical_vr_validation": false,
+  "file_sha256": {
+    "figure_1_recovery_comparison.pdf": "ceda1961ce38d63f87b9bad8c9d54c58e780844da34ad361a20669320fd7b972",
+    "figure_1_recovery_comparison.png": "60a09b1b0c7bd269edfbb4457fc70ba61ec100866ea9590f22c16173f8f41633",
+    "figure_2_profile_recovery_effects.pdf": "6b719cc4de6e6f3af0d3a6db73552bc156e5c12bb950b7dbc5864d6507fbba4b",
+    "figure_2_profile_recovery_effects.png": "c7a43e658c01ba2b9b4dcc9dba7498a2e727d1ecd6f7a5062e36d7d76df003ec",
+    "figure_3_adverse_outcomes.pdf": "1ee6750b0f827466e70e0d402182f40ef049b4072d074173b1fd088c14013aa1",
+    "figure_3_adverse_outcomes.png": "fab1e8fef2e31d63141532e52a9bc66d021f336e2b230afdd8627a8dea9e1874",
+    "regression_test_log.txt": "acd74a7f1e598fce7186d489e136c808626fbd59b4a7463246e5580a4a46c77c",
+    "table_1_primary_results.csv": "4fbe07c38d9e7e6e40956f0cce84b81c61eaa06c2d4116e208e489283d6fac25",
+    "table_2_condition_results.csv": "9c3be412079c02279f7ead2cc948fe3562696dd5922a23e75f8083dcab042e80",
+    "table_3_paired_effects.csv": "ef13be83c67d27c87c00ac25e2fee53bfcf51bfcd27796371cd7ffb2a593f65f",
+    "table_4_safety_rates.csv": "25c172f7dd5b862e1a74edb9ab6ca7720d42e8e59c6263aabeb93ee39619201a"
+  }
+}

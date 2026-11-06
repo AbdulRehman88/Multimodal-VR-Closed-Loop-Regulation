@@ -1,0 +1,21 @@
+{
+  "protocol_sha256": "ba193b21e6e990489e395c91b72a8c0eabbba8a61af8f1c5165a52bb30df0008",
+  "independent_profiles": 200,
+  "independent_episodes": 400,
+  "ablation_validation_profiles": 20,
+  "revised_figures": 5,
+  "F5_original_omissions": 5,
+  "F5_revised_omissions": 0,
+  "F5_observed_min_gain_s": -1.011111111111111,
+  "F5_observed_max_gain_s": 1.6111111111111112,
+  "font_family": "Times New Roman",
+  "title_pt": 16,
+  "axes_pt": 14,
+  "legend_pt": 14,
+  "ticks_pt": 12,
+  "png_dpi": 600,
+  "pdf_output": true,
+  "no_new_experiments": true,
+  "existing_figures_preserved": true,
+  "manual_visual_inspection_pending": true
+}

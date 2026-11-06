@@ -1,0 +1,13 @@
+{
+  "protocol_sha256": "ba193b21e6e990489e395c91b72a8c0eabbba8a61af8f1c5165a52bb30df0008",
+  "model_sha256": "1884007ac6581b6653c3227e464256b5ccc56c1e30acf847f543371312f36467",
+  "cohort_sha256": "f76b13e052025c354cfe468abc2dc7eeef2af0bb19ede7f83d4f7d19cf63b1b7",
+  "seed_rule": "first 8 bytes of SHA256(final-ai-v1|20261103|profile|condition) modulo 2**32",
+  "profiles": 200,
+  "conditions": 2,
+  "controllers": 3,
+  "episodes": 1200,
+  "model_retrained": false,
+  "controller_tuned": false,
+  "prior_oracle_seed_reproduction_claimed": false
+}

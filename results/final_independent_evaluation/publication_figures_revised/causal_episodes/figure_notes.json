@@ -1,0 +1,15 @@
+{
+  "F2": "Motion is synthetic. First observed samples are 0-89; first feedback is at sample 90. The next observation window is samples 9-98 before feedback at sample 99.",
+  "F3": "Low and Elevated examples use profile 100000. Each replay is verified against the locked independent test. AI does not observe latent state.",
+  "F4": "Profile 100004 Elevated was selected post-hoc for a genuine adverse episode. Red crosses indicate changes in the wrong direction. Classifier confidence is not calibrated.",
+  "scope": "These are simulator-generated data, not human physiological recordings.",
+  "format": {
+    "font": "Times New Roman",
+    "titles_pt": 16,
+    "axes_pt": 14,
+    "legend_pt": 14,
+    "ticks_pt": 12,
+    "pdf": true,
+    "png_dpi": 600
+  }
+}

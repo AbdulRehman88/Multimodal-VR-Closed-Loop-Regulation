@@ -1,0 +1,4 @@
+adverse_either,opposite_episode,episodes,mean_recovery_gain_s,mean_stability_gain_pp,opposite_actions,reserve_boundary_episodes
+0,0,233,0.2591320934668574,2.159434112223812,0,226
+0,1,102,0.4624183006535948,3.853485838779956,396,92
+1,1,65,-0.26632478632478623,-2.219373219373219,349,55

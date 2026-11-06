@@ -1,0 +1,14 @@
+# Multimodal-VR frozen experiment
+# Verified environment: Python 3.11.9
+# Exact direct dependency versions used in reproduction
+# Full transitive dependency lock still to be verified
+
+numpy==2.4.6
+scipy==1.17.1
+scikit-learn==1.9.1
+pandas==3.1.0
+joblib==1.6.0
+matplotlib==3.11.2
+tqdm==4.70.1
+pytest==9.2.0
+PyYAML==6.0.3

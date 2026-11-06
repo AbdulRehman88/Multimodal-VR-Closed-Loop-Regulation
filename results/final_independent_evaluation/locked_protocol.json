@@ -1,0 +1,131 @@
+{
+  "controllers": {
+    "matched_reserved_oracle": {
+      "first_control_time_s": 1.0,
+      "max_change_per_update": 0.05,
+      "neutral_return": true,
+      "neutral_return_reserve": true,
+      "neutral_stimulus": 0.5,
+      "observation": "privileged_true_state",
+      "role": "information_quality_upper_reference",
+      "same_directional_control_rule_as_ai": true,
+      "variation_budget": 0.6
+    },
+    "neutral": {
+      "role": "no_adaptation_baseline",
+      "stimulus": 0.5
+    },
+    "reserved_ai": {
+      "class_mapping": {
+        "0": "Low",
+        "1": "Regulated",
+        "2": "Elevated"
+      },
+      "confidence_abstention": false,
+      "first_control_time_s": 1.0,
+      "max_change_per_update": 0.05,
+      "model": "results/frozen_one_second_ai_baseline/motion_time_unweighted.joblib",
+      "neutral_return": true,
+      "neutral_return_reserve": true,
+      "neutral_stimulus": 0.5,
+      "observation": "causal_motion_and_elapsed_time",
+      "variation_budget": 0.6
+    }
+  },
+  "development": {
+    "development_validation_profiles": 20,
+    "further_tuning_permitted": false,
+    "model_frozen": true,
+    "model_sha256": "1884007ac6581b6653c3227e464256b5ccc56c1e30acf847f543371312f36467",
+    "training_profiles": 60,
+    "validation_previously_examined": true
+  },
+  "endpoints": {
+    "direction_of_benefit": {
+      "recovery_time_s": "lower",
+      "state_stability_pct": "higher"
+    },
+    "primary": [
+      "recovery_time_s",
+      "state_stability_pct"
+    ],
+    "primary_contrasts": [
+      "reserved_ai_minus_neutral",
+      "reserved_ai_minus_matched_reserved_oracle"
+    ],
+    "secondary": [
+      "recovery_success",
+      "stimulus_total_variation",
+      "opposite_boundary_overshoot",
+      "final_neutral_distance",
+      "opposite_direction_actions",
+      "unnecessary_directional_actions",
+      "reserve_boundary_reached"
+    ]
+  },
+  "experimental_design": {
+    "both_initial_conditions_per_profile": true,
+    "control_rate_hz": 10,
+    "episode_duration_s": 12.0,
+    "future_information_in_ai_inputs": false,
+    "matched_random_disturbances": true,
+    "paired_profiles": true,
+    "parameter_selection_after_test": false,
+    "sampling_rate_hz": 90
+  },
+  "final_cohort": {
+    "eligibility": "All valid prespecified profiles",
+    "exclude_failed_episodes": false,
+    "expected_episodes": 400,
+    "expected_profiles": 200,
+    "frozen_ai_previously_evaluated_here": false,
+    "initial_conditions": [
+      "Low",
+      "Elevated"
+    ],
+    "prior_oracle_benchmarking_performed": true,
+    "profile_file": "configs/independent_synthetic_test_profiles.csv",
+    "profile_file_sha256": "f76b13e052025c354cfe468abc2dc7eeef2af0bb19ede7f83d4f7d19cf63b1b7"
+  },
+  "integrity": {
+    "forbid_controller_tuning": true,
+    "forbid_model_retraining": true,
+    "forbid_test_based_model_selection": true,
+    "independent_cohort_parsed_during_freeze": false,
+    "preserve_all_episode_results": true,
+    "preserve_failure_cases": true,
+    "source_sha256": {
+      "configs/independent_synthetic_test_profiles.csv": "f76b13e052025c354cfe468abc2dc7eeef2af0bb19ede7f83d4f7d19cf63b1b7",
+      "results/frozen_one_second_ai_baseline/model_manifest.json": "ec8bbb537f4ebd29478b132d093f576655c816ee9dfa97234b31f46cdd6192d0",
+      "results/frozen_one_second_ai_baseline/motion_time_unweighted.joblib": "1884007ac6581b6653c3227e464256b5ccc56c1e30acf847f543371312f36467",
+      "src/models/online_motion_features.py": "1556857fd74f3e1c03539ce5bee4e38a0915d5fd38e841013f1f5e45a498fa51",
+      "src/simulator/ai_closed_loop.py": "6faebd1c0d656a0c37ae851a403eaebb27067da776b9c51a9dc02add2c2fe7aa",
+      "src/simulator/closed_loop.py": "d08d8f251cbf7a11fa843022e0e2ea05ec2e602c3e291968083e7cb449579174"
+    }
+  },
+  "protocol_name": "Final Synthetic AI Closed-Loop Evaluation",
+  "protocol_version": "1.0",
+  "scientific_scope": {
+    "claims_limited_to_synthetic_dynamics": true,
+    "human_subjects_included": false,
+    "physical_energy_measured": false,
+    "physical_vr_validation": false,
+    "physiological_state_measured": false
+  },
+  "statistics": {
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 2026,
+    "bootstrap_type": "profile_cluster_bootstrap",
+    "confidence_level": 0.95,
+    "effect": "paired_mean_difference",
+    "exclude_nonrecoveries": false,
+    "independent_unit": "synthetic_profile",
+    "inference_note": "Bootstrap intervals are descriptive; primary endpoint analyses are not familywise-adjusted.",
+    "nonrecovery_recovery_time_s": 12.0,
+    "report_absolute_and_relative_effects": true,
+    "report_all_failures": true,
+    "report_both_conditions_separately": true,
+    "two_initial_conditions": "average_within_profile"
+  },
+  "study_type": "simulation_based_profile_independent_evaluation"
+}

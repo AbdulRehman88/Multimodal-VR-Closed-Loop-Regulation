@@ -1,0 +1,55 @@
+F4. Closed-loop controller performance on 200 independent
+synthetic profiles (400 paired episodes). Bars are policy
+means; report profile-clustered paired 95% confidence
+intervals in the manuscript's statistical results table.
+The matched oracle has privileged simulated-state access.
+
+F5. Distribution of paired recovery-time improvements
+over neutral control for 200 Low and 200 Elevated episodes.
+Positive values indicate faster recovery. All 400 effects
+are included. Histograms are descriptive, and the two
+episodes from each profile are not independent profiles.
+
+F6. Descriptive comparison of mean recovery improvement
+and total stimulus variation. The variation ceiling applies
+to each constrained episode. Variation is a control-effort
+proxy and is not a physical energy measurement.
+
+F7. Low- and Elevated-condition rates of adverse AI outcomes,
+opposite-direction actions, and reserve-boundary occurrence.
+Whiskers show profile-clustered bootstrap 95% intervals.
+Directional errors and adverse outcomes are associated;
+causation is not established by these rates alone.
+
+F8. Information-source ablations using 20 disjoint
+development-validation profiles (40 episodes). These are
+not independent-test results. Earlier development policies
+used different resource configurations from the final
+reserved-controller comparison; control variation must be
+considered when interpreting performance.
+
+
+FINAL SURGICAL CAPTION CLARIFICATIONS
+
+F4_wrong_direction_failure:
+This post-hoc Elevated-state episode exhibits six
+opposite-direction interventions. At the first marked
+action the model predicted Low, whereas the simulated
+ground-truth state was Elevated. Class probabilities
+are uncalibrated. The illustrated state is a simulation
+variable, not measured human physiology.
+
+F7_failure_safety_revised:
+Opposite-direction incidence is the proportion of
+episodes containing at least one action contrary to
+the simulated state. Reserve-boundary incidence refers
+to reaching the controller's variation-plus-return
+invariant, not necessarily consuming 0.6 units of
+total stimulus variation alone. Error bars show
+profile-clustered bootstrap 95% confidence intervals.
+
+F8_information_ablation_revised:
+Development-validation comparison involving 20 profiles
+and 40 episodes. Earlier policies retain their original
+control configurations and are not resource-budget matched
+to the final independent-test reserved controller.

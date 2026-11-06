@@ -1,0 +1,15 @@
+{
+  "F4": "Independent 200-profile policy comparison. Confidence intervals refer to paired profile effects; bars show policy means.",
+  "F5": "Per-profile paired recovery gains shown separately for Low and Elevated initial states.",
+  "F6": "Descriptive recovery/variation trade-off. Variation is not measured physical energy.",
+  "F7": "Profile-cluster bootstrap confidence intervals for adverse outcomes, opposite actions, and reserve saturation.",
+  "F8": "Development-validation ablations, N=20 profiles. Not an independent-test model comparison.",
+  "general": [
+    "All state variables and signals are synthetic.",
+    "No human physiological measurements are plotted.",
+    "No new training, controller tuning, or simulation.",
+    "Times New Roman used in all new figures.",
+    "PDF is vector format; PNG saved at 600 DPI.",
+    "Final output should be inspected visually at 100 percent."
+  ]
+}

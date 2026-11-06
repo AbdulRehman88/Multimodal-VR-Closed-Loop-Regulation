@@ -1,0 +1,19 @@
+{
+  "protocol_sha256": "ba193b21e6e990489e395c91b72a8c0eabbba8a61af8f1c5165a52bb30df0008",
+  "profile_clusters": 200,
+  "episodes": 400,
+  "bootstrap_replicates": 10000,
+  "bootstrap_seed": 2026,
+  "adverse_definition": "recovery slower OR stability lower than paired neutral episode",
+  "confidence_intervals": "Percentile profile-cluster bootstrap",
+  "association_is_causal": false,
+  "controller_tuning": false,
+  "new_simulations": false,
+  "independent_test_reused_for_diagnostics": true,
+  "claims": [
+    "Synthetic closed-loop effectiveness only",
+    "Directional errors remain",
+    "Variation is not physical energy",
+    "No participant or physical-VR validation"
+  ]
+}

@@ -1,0 +1,11 @@
+﻿.venv/
+.venv-repro/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*.log
+.DS_Store
+Thumbs.db
+.ipynb_checkpoints/
+*.zip
+*.tmp

@@ -1,0 +1,24 @@
+{
+  "figure": "F1_complete_causal_method_architecture",
+  "protocol_sha256": "ba193b21e6e990489e395c91b72a8c0eabbba8a61af8f1c5165a52bb30df0008",
+  "pdf_sha256": "5fe59a8f0e75cc5cf9f53be0ccea12fa15a021d780eb56f75ecc8ad1454d26df",
+  "png_sha256": "50009ffc65c34c62a77ebc0715f21cdecb490a27c678b423a2cf0e068e9fb0ae",
+  "png_resolution": [
+    9192,
+    5207
+  ],
+  "font": "Times New Roman",
+  "title_pt": 16,
+  "axis_label_pt": 14,
+  "legend_pt": 14,
+  "tick_pt": 12,
+  "png_dpi": 600,
+  "architecture_type": "Implemented causal simulation framework",
+  "frozen_estimator": "StandardScaler + LogisticRegression",
+  "model_inputs": "14 online motion features + elapsed time",
+  "ai_has_access_to_hidden_state": false,
+  "physical_vr_validated": false,
+  "new_experiments": false,
+  "existing_figures_overwritten": false,
+  "manual_visual_review_pending": true
+}
