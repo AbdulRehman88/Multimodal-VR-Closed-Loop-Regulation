@@ -1,151 +1,246 @@
 # Motion-Driven Closed-Loop Regulation Under Partial Observability
 
-**A reproducible synthetic framework for causal motion-derived state estimation and resource-constrained feedback regulation.**
+**Reproducible synthetic virtual-reality research software for causal motion-derived state estimation, budget-constrained feedback regulation, and matched controller evaluation.**
 
-This repository contains the frozen implementation, trained estimator, independent evaluation profiles, paired experimental results, and verification tools for a simulation-based study of motion-informed closed-loop regulation.
+This repository contains the simulator, frozen machine-learning estimators, controller implementations, synthetic profile definitions, deterministic episode seeds, paired results, audit records, manuscript figures, and reproduction tools for a computational study of feedback regulation under partial observability.
 
-**Maintainer:** Abdul Rehman  
-**Repository:** https://github.com/AbdulRehman88/Multimodal-VR-Closed-Loop-Regulation  
-**Status:** Reproduced independent evaluation; publication software release preparation.
+The software release covers **two independently generated synthetic evaluation cohorts**: a three-policy study of **1,200 episodes** (Cohort A) and a separate nine-policy comparison of **3,600 episodes** (Cohort B). Their population-generation procedures differ; results are reported separately and should not be pooled as if they were one population.
 
-## 1. Research objective
+- **Maintainer:** Abdul Rehman
+- **Repository:** [AbdulRehman88/Multimodal-VR-Closed-Loop-Regulation](https://github.com/AbdulRehman88/Multimodal-VR-Closed-Loop-Regulation)
+- **Release:** `v1.1.0` (documentation for the release candidate; tag and archive status must be confirmed independently)
+- **License:** MIT for the original software; third-party packages retain their own licenses.
+- **Scientific scope:** **Synthetic simulation only.** No human participants, measured physiological or emotional states, deployed VR application, hardware energy measurements, or clinical efficacy testing are represented by these experiments.
 
-The central question is whether incomplete, causal motion-derived information can support effective feedback regulation of an unobserved synthetic state under an explicit intervention budget.
+## 1. Research question and contributions
 
-The framework evaluates:
+**Can causally available, incomplete motion observations support regulation of an unobserved synthetic state while respecting a strict intervention budget?**
 
-1. Whether motion-informed feedback improves recovery and regulated-state residence compared with constant-neutral intervention.
-2. How much performance is lost relative to a resource-matched controller with direct access to the simulated state.
-3. How prediction errors, incorrect intervention directions, profile heterogeneity, and resource saturation affect closed-loop outcomes.
+This repository enables investigation of four connected questions:
 
-The contribution is the integrated control and evaluation framework, not a novel classification algorithm or an optimal-control guarantee.
+1. **Closed-loop utility:** Does motion-informed feedback improve recovery and time spent in the regulated interval relative to constant-neutral intervention?
+2. **Information dependence:** How do elapsed-time-only, motion-only, motion-threshold, and time-preserved sham-motion comparators perform relative to a motion-and-time estimator?
+3. **Control-budget design:** What changes when the controller explicitly reserves enough remaining intervention variation for a feasible return to neutral?
+4. **Performance boundaries:** How does the proposed controller compare with an information-privileged state oracle, and where does it exhibit adverse or condition-specific behavior?
 
-**Scientific scope:** All experiments are synthetic. This repository does not contain human-subject experiments, measured physiological states, a deployed VR application, or clinical efficacy evidence.
+The contribution is an **integrated causal simulation, estimation, constrained feedback, and leakage-aware evaluation framework**, not a new classification architecture, a proof of globally optimal control, or a real-world safety certification.
 
-## 2. System overview
+## 2. System and control protocol
 
-The experimental framework consists of:
+### 2.1. Synthetic latent state
 
-- A profile-parameterized, bounded latent-state simulator.
-- State-dependent, three-dimensional stochastic motion generation at 90 Hz.
-- Completed, causal one-second observation windows.
-- Fourteen motion descriptors and elapsed time (15 inputs).
-- A frozen `StandardScaler + LogisticRegression` three-class estimator.
-- A 10-Hz motion-informed feedback controller.
-- A cumulative stimulus-variation budget with a reserved capacity for returning to neutral.
-- A constant-neutral comparator and a matched privileged-state oracle.
-- Independent profile evaluation, paired disturbances, cluster-aware inference, and adverse-intervention audits.
+The simulator models a bounded latent variable on **[0, 10]**, with target **5** and regulated interval **[4, 6]**. Two initial conditions are considered:
 
-### Synthetic state
+| Condition | Initial synthetic state |
+|---|---:|
+| Low | 2 |
+| Elevated | 8 |
 
-The hidden state is bounded to `[0, 10]`, with target `5` and regulated interval `[4, 6]`.
+“Low,” “Regulated,” and “Elevated” denote simulator-defined computational states, not clinically or psychologically validated conditions.
 
-Two initial conditions are evaluated:
+The synthetic population varies in latent-state and motion-related parameters. Motion is generated in three dimensions and depends on the simulated state and profile-specific parameters.
 
-- Low: initial state `2`.
-- Elevated: initial state `8`.
+### 2.2. Causal observation and estimation
 
-These labels represent simulated computational states, not validated psychological or physiological conditions.
+Motion is sampled at **90 Hz**. The controller consumes features computed from **completed one-second observation windows**; a decision cannot use an observation from its own future control time.
 
-### Motion inference
+The frozen principal estimator is a `StandardScaler` + three-class `LogisticRegression` pipeline using **14 motion descriptors and elapsed time** (15 inputs). It predicts Low, Regulated, or Elevated classes; it **does not** regress the continuous latent-state value.
 
-The classifier receives 14 causal motion features plus elapsed simulation time. Its output is one of:
+Elapsed time can encode the simulated recovery schedule. The comparative design therefore isolates time-only information (B2), motion-only information (B3), and time-preserved sham motion (B8).
 
-- `0`: Low
-- `1`: Regulated
-- `2`: Elevated
+### 2.3. Intervention limits
 
-The estimator does not predict continuous latent-state values. Its fitted parameters are frozen before independent evaluation.
-
-### Feedback constraints
-
-The normalized intervention is bounded to `[0, 1]` with neutral value `0.5`.
-
-The AI and matched oracle operate under:
-
-- Control frequency: 10 Hz.
-- First feedback decision: 1.0 s.
-- Maximum stimulus change per update: 0.05.
-- Total stimulus-variation allowance: 0.6.
-- Neutral-return reserve: enabled.
-
-The reserve mechanism preserves sufficient remaining variation capacity to return to neutrality. It does not mathematically force terminal neutrality for every possible trajectory.
-
-Stimulus variation is a normalized computational control-effort measure, not physical energy consumption.
-
-## 3. Experimental design
-
-| Parameter | Frozen value |
-|---|---|
-| Simulation frequency | 90 Hz |
+| Parameter | Frozen setting |
+|---|---:|
+| Sampling rate | 90 Hz |
 | Episode duration | 12 s |
-| Observation window | 90 samples / 1 s |
-| Control frequency | 10 Hz |
-| Estimator inputs | 15 |
-| Training profiles | 60 |
-| Development-validation profiles | 20 |
-| Independent test profiles | 200 |
-| Conditions per test profile | Low and Elevated |
-| Test episodes per policy | 400 |
-| Evaluated policies | Neutral, reserved AI, matched reserved oracle |
-| Total policy episodes | 1,200 |
-| Bootstrap replicates | 10,000 |
-| Bootstrap seed | 2026 |
-| Independent resampling unit | Synthetic profile |
+| Observation window | 1.0 s |
+| Feedback frequency | 10 Hz |
+| First feedback decision | After 1.0 s |
+| Normalized stimulus range | [0, 1] |
+| Neutral stimulus | 0.5 |
+| Maximum absolute change per update | 0.05 |
+| Total absolute stimulus-variation budget | 0.6 |
 
-Profile assignments are separated between development and independent evaluation. All policy comparisons retain the specified paired profile-condition disturbances.
+For intervention values \(u_k\), the expenditure is the sum of absolute changes at feedback updates (including the change from the initial neutral value). The **neutral-return reserve** limits expenditure so sufficient variation remains for a feasible return to `0.5`:
 
-## 4. Frozen evaluation results
+\[
+V_k + |u_k - 0.5| \leq 0.6.
+\]
 
-The following values are means across the 400 independent test episodes per policy.
+This is a **budget-feasibility invariant** in the implemented simulator. It does not, by itself, guarantee that the intervention actually ends at neutral, that every episode recovers, or that the controller is safe in the physical world. Stimulus variation is **not** measured power or energy.
 
-| Policy | Recovery (s) | Stability (%) | Stimulus variation |
-|---|---:|---:|---:|
-| Neutral | 2.261917 | 81.150694 | 0.0000 |
-| Reserved AI | 2.036333 | 83.030556 | 0.5885 |
-| Matched reserved oracle | 1.894500 | 84.212500 | 0.5535 |
+## 3. Evaluation cohorts: distinct provenance
 
-Compared with neutral regulation, reserved AI improved mean recovery by approximately 0.22558 s and regulated-state stability by approximately 1.87986 percentage points.
+| Design element | Cohort A | Cohort B |
+|---|---|---|
+| Purpose | Primary three-policy synthetic evaluation | Independent nine-policy comparative benchmark |
+| Independent synthetic profiles | 200 | 200 |
+| Initial conditions per profile | Low and Elevated | Low and Elevated |
+| Policies | B0, B6, B7 | B0–B8 |
+| Episodes per policy | 400 | 400 |
+| Total policy episodes | **1,200** | **3,600** |
+| Frozen evidence | `results/final_independent_evaluation/` | `revision/results/confirmatory_200/` |
+| Profile-generation provenance | Original independent test population | Separately generated comparative population |
 
-The privileged-state oracle performed better than reserved AI under the matched resource restrictions.
+**Do not merge the two cohorts as though their profile identifiers or sampling distributions were identical.** They are separate synthetic populations with different generation provenance. Their within-cohort paired analyses are meaningful under their respective frozen protocols; a pooled effect estimate is not supplied here.
 
-The final reliability audit also identified:
+The principal development dataset used **60 training and 20 development-validation profiles**. Fitted classifiers and controller parameters were frozen before the independent evaluations. The development dataset and Cohort B seed ledger are included for the comparative reproduction pipeline.
 
-- 65 of 400 AI episodes with an adverse outcome relative to neutral.
-- 167 episodes containing at least one opposite-direction action.
-- 745 opposite-direction actions in total.
-- 373 episodes reaching the AI reserve boundary.
+## 4. Controllers and information controls
 
-The formal adverse-outcome definition is slower recovery **or** lower stability relative to the paired neutral episode. In the final evaluation, these two individual criteria identified the same 65 episodes.
+| ID | Policy | Main distinguishing feature |
+|---|---|---|
+| **B0** | Constant neutral | No active feedback; stimulus remains at `0.5` |
+| **B1** | Fixed schedule | Prespecified intervention schedule |
+| **B2** | Time-only classifier | Elapsed time without motion descriptors |
+| **B3** | Motion-only classifier | Motion descriptors without elapsed time |
+| **B4** | Motion-threshold policy | Rule-based feedback using motion thresholds |
+| **B5** | AI, reserve disabled | Frozen motion-and-time feedback without neutral-return reservation |
+| **B6** | AI, reserve enabled | Proposed frozen motion-and-time feedback with neutral-return reservation |
+| **B7** | Privileged-state oracle | Direct access to the true **simulated** latent state, subject to the configured resource limits |
+| **B8** | Time-preserved sham-motion policy | Replaces recipient motion descriptors with a deterministic training-only donor trajectory while preserving elapsed time |
 
-All 400 final episodes recovered under each evaluated policy; recovery time nevertheless differed between policies.
+**B5 versus B6:** They use the same frozen estimator and nominal per-update and total-variation limits. The intentionally manipulated factor is the neutral-return reserve.
 
-These findings apply only to the tested synthetic dynamics and profile population.
+**B7 is not deployable under the motion-only observation assumption.** It is an information-privileged reference, not a practical estimator or evidence of an optimal policy.
 
-## 5. Repository structure
+**B8 is a diagnostic control, not a newly fitted model.** Its 120 donor trajectories come exclusively from training profiles (60 profiles × two conditions). A deterministic hash of the episode seed chooses the donor; motion features retain coherent within-donor time ordering while the recipient’s elapsed-time input is unchanged. Donor selection does not use recipient outcomes or latent state.
+
+## 5. Cohort A: three-policy results
+
+The first independent synthetic cohort evaluates **400 episodes per policy**.
+
+| Policy | Mean recovery time (s) | Regulated-state stability (%) |
+|---|---:|---:|
+| B0 — Neutral | 2.261917 | 81.150694 |
+| **B6 — Reserved AI** | **2.036333** | **83.030556** |
+| B7 — Privileged-state oracle | 1.894500 | 84.212500 |
+
+Relative to neutral, B6 reduced mean recovery time by approximately **0.22558 s** and increased time in the regulated interval by approximately **1.87986 percentage points**. The privileged-state oracle performed better than B6 on both means.
+
+The frozen adverse-intervention audit also records:
+
+- **65/400** B6 episodes with an adverse paired outcome against neutral (slower recovery **or** lower stability).
+- **167** episodes containing at least one opposite-direction action.
+- **745** opposite-direction actions across those episodes.
+- **373** episodes reaching the reserve boundary.
+
+The two separate adverse criteria identified the same 65 episodes in this cohort. All 400 episodes recovered under each evaluated policy, although recovery times differed. These are synthetic, profile- and protocol-specific outcomes; they do not imply uniform individual-level benefit.
+
+## 6. Cohort B: nine-policy comparative results
+
+The independent comparative cohort evaluates **200 profiles × two initial conditions × nine policies = 3,600 episodes**. The values below are descriptive means or rates over **400 episodes per policy**.
+
+| Policy | Mean recovery (s) | Stability (%) | Mean variation | Recovered (%) | Neutral-return feasible (%) |
+|---|---:|---:|---:|---:|---:|
+| B0 | 2.266861 | 81.109491 | 0.00000 | 100.00 | 100.00 |
+| B1 | 2.301750 | 80.818750 | 0.60000 | 100.00 | 100.00 |
+| B2 | 2.292667 | 80.894444 | 0.60000 | 100.00 | 100.00 |
+| B3 | 2.141806 | 82.151620 | 0.28000 | 100.00 | 100.00 |
+| B4 | 2.155056 | 82.041204 | 0.55475 | 100.00 | 100.00 |
+| **B5** | **2.323139** | **72.554398** | **0.59025** | **96.75** | **10.75** |
+| **B6** | **2.048389** | **82.930093** | **0.59025** | **100.00** | **100.00** |
+| B7 | 1.905667 | 84.119444 | 0.55400 | 100.00 | 100.00 |
+| B8 | 2.326556 | 80.612037 | 0.58875 | 100.00 | 100.00 |
+
+B6 had better **overall mean recovery** than B0, B1, B2, B3, B4, B5, and B8 in this evaluation. B7, which accesses privileged latent-state information, achieved the best overall mean recovery and stability.
+
+**Overall means do not establish universal superiority.** B6 was not best in every Low/Elevated subgroup or for every profile. In particular, the condition-specific results include unfavorable comparisons for B6 against some simpler controls.
+
+### 6.1. Prespecified overall recovery contrasts
+
+Positive values indicate **B6 recovery-time improvement** over the comparator.
+
+| Contrast | B6 improvement (s) | Archived 95% confidence interval |
+|---|---:|---|
+| B6 vs B1 | 0.253361 | [0.218472, 0.289528] |
+| B6 vs B2 | 0.244278 | [0.210222, 0.279946] |
+| B6 vs B3 | 0.093417 | [0.072861, 0.113973] |
+| B6 vs B4 | 0.106667 | [0.066804, 0.150862] |
+
+The frozen comparative statistical analysis reports **Holm-adjusted p = 0.00008** for each of these four comparisons. These results use the study’s paired, profile-aware synthetic analysis protocol and do not establish effects in actual VR users.
+
+### 6.2. Reserve ablation: B5 versus B6
+
+B5 removes the neutral-return reserve while retaining the same nominal action bounds and frozen estimator as B6.
+
+| Outcome | B5 (reserve off) | B6 (reserve on) |
+|---|---:|---:|
+| Mean recovery (s) | 2.323139 | 2.048389 |
+| Stability (%) | 72.554398 | 82.930093 |
+| Mean stimulus variation | 0.59025 | 0.59025 |
+| Recovered (%) | 96.75 | 100.00 |
+| Neutral-return feasible (%) | 10.75 | 100.00 |
+
+Under B5, **357/400** episodes exhausted their ability to fund a return to neutral under the reserve criterion; the audit further identifies **77 relapses**, **90 terminal states outside [4, 6]**, and **13 unrecovered episodes**. These categories may overlap and must not be summed as independent events.
+
+The paired comparison isolates the effect of the **implemented reserve rule under the synthetic dynamics**. It does not prove that the mathematical rule provides general safety outside this controlled model.
+
+### 6.3. Information-source and sham controls
+
+- **B2:** Tests what can be achieved using only elapsed time.
+- **B3:** Tests feedback relying on motion without elapsed time.
+- **B4:** Provides a simple rule-based motion policy.
+- **B8:** Preserves the time input while replacing recipient motion with coherent, training-only sham-motion data.
+
+These controls help distinguish information-source contributions from effects that could arise solely from elapsed time or generic intervention schedules. They do **not** validate a real-world physiological motion–state mapping.
+
+## 7. Endpoints, pairing, and statistical interpretation
+
+- **Recovery:** First qualifying entry into **[4, 6]** followed by continuous residence for **one second**. Unrecovered episodes receive the specified **12-second horizon** for recovery-time comparisons.
+- **Stability:** Percentage of simulation samples within **[4, 6]**.
+- **Variation:** Sum of absolute normalized intervention changes at controller updates.
+- **Neutral-return feasibility:** Whether the remaining variation budget can fund returning the current stimulus to `0.5`; distinct from actually returning to neutral.
+- **Opposite-direction action:** An action contrary to the corrective direction indicated by the true synthetic state, assessed retrospectively.
+- **Adverse paired outcome:** An episode with worse recovery time or stability than its paired neutral reference, as defined by the frozen evaluation protocol.
+
+The independent inferential unit is the **synthetic profile**. A profile contributes both initial conditions, and policy effects are paired within profile and condition; observation windows, motion frames, and controller updates are **not** independent replicate subjects.
+
+Cohort A uses a **10,000-replicate profile-cluster bootstrap (seed 2026)** in its frozen statistical analysis. Cohort B has a separately frozen statistical protocol and multiplicity-adjusted contrasts. Inference from the two cohorts should be interpreted separately; confidence intervals on different endpoints from the same trajectories are not independent pieces of evidence.
+
+## 8. Repository structure
+
+The most important public paths are:
 
 ```text
 configs/
-  controller_tuning_protocol.json
   frozen_development_profiles.csv
   independent_synthetic_test_profiles.csv
 
 src/
   controllers/
-  evaluation/
-  models/
+    simple_policies.py
+    information_adapters.py
+    sham_motion.py
   simulator/
+    reserve_configurable.py
+  models/
+  evaluation/
 
-tests/
+revision/
+  run_confirmatory_comparison.py      # Frozen historical runner; provenance
+  run_portable_comparison.py           # Supported Cohort B reproduction entry point
+  baseline_policies.py                # Frozen historical policy source
+  simulator_B5_budget_only.py         # Frozen historical simulator source
+  configs/
+    comparative_protocol_lock.json
+    confirmatory_profiles_200.csv
+    confirmatory_episode_seeds.csv
+    confirmatory_runner_lock.json
+    confirmatory_results_integrity_audit.json
+  models/
+    B2_time_only.joblib
+    B3_motion_only.joblib
+  results/
+    confirmatory_200/                 # 200 frozen profile checkpoints
 
 results/
   frozen_one_second_ai_baseline/
-    model_manifest.json
     motion_time_unweighted.joblib
-
+  motion_state_dataset/
+    development_windows.csv
   final_independent_evaluation/
-    locked_protocol.json
-    locked_protocol.sha256
     final_results/
     publication_evidence/
     publication_figures_revised/
@@ -155,26 +250,31 @@ reproduce_final_evaluation.py
 verify_matched_oracle.py
 verify_statistical_inference.py
 
+FULL_CANONICAL_REPRODUCTION_AUDIT.json
+PORTABLE_COMPARATIVE_PREFLIGHT.json
+CANONICAL_B8_PARITY.json
+CANONICAL_RESERVE_SIMULATOR_PARITY.json
+RELEASE_SHA256_MANIFEST.json
+RELEASE_NOTES_v1.1.0.md
+
 requirements-repro.txt
 requirements-lock.txt
-STAGING_MANIFEST.json
-LICENSE
 CITATION.cff
+LICENSE
 ```
 
-The release includes the accepted experimental implementation and final evidence. Exploratory controllers, failed development attempts, and superseded experiments are not part of the publication workflow.
+The `revision/` namespace includes **historical execution and audit records**. Some historical scripts retain original machine-specific paths; those are retained for provenance, not represented as universally portable entry points. The supported comparative runner is `revision/run_portable_comparison.py`.
 
-## 6. Reproducibility environment
+## 9. Reproducibility
 
-The end-to-end evaluation was reproduced on Windows using Python 3.11.9.
+### 9.1. Python environment
 
-The recommended reproducibility specification is:
+The established clean Cohort A reproduction used **Python 3.11.9 on Windows**. The repository includes:
 
-`requirements-lock.txt`
+- `requirements-lock.txt`: pinned package-version inventory from the verified clean Cohort A environment.
+- `requirements-repro.txt`: smaller direct-dependency specification.
 
-This is the complete pinned package-version inventory from the clean environment in which all 1,200 episodes reproduced successfully. It is not a wheel-hash lock and does not independently establish cross-platform bitwise reproducibility.
-
-For a new Windows PowerShell environment:
+Example Windows PowerShell setup from the repository root:
 
 ```powershell
 py -3.11 -m venv .venv
@@ -182,159 +282,143 @@ py -3.11 -m venv .venv
 .\.venv\Scripts\python.exe -m pip check
 ```
 
-`requirements-repro.txt` lists nine direct dependencies and is available for a lighter installation.
+A pinned package list is not a wheel-hash lock and **does not guarantee bitwise reproducibility on every platform or future installation**. The full Cohort B numerical replay was verified in the established project environment; no separate cross-platform or clean-install test of that complete package is claimed.
 
-The older `requirements.txt` is a retained development-environment snapshot. It includes dependencies not needed by the accepted scikit-learn pipeline and is not the recommended installation file.
+### 9.2. Cohort A: tests and archived checks
 
-## 7. Reproducing the published evaluation
-
-Run these commands from the repository root, using the installed Python environment.
-
-### Unit tests
+Run from the repository root:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest -q tests
-```
-
-Expected result: 30 passing tests.
-
-### Archived numerical evidence
-
-```powershell
 .\.venv\Scripts\python.exe reproduce_archived_results.py
-```
-
-This verifies the frozen file manifest, 400 deterministic episode seeds, 1,200 paired policy records, principal means, paired-effect summaries, selected bootstrap results, adverse episodes, and resource audits.
-
-### Statistical inference
-
-```powershell
 .\.venv\Scripts\python.exe verify_statistical_inference.py
-```
-
-This checks all 18 paired-effect contrasts and their archived intervals, plus 18 profile-bootstrap safety-rate intervals.
-
-The paired-effect confidence intervals are evaluated with documented tolerances for differences between independently generated bootstrap random sequences. The safety-rate intervals were reproduced exactly in the verified environment.
-
-### Full independent evaluation
-
-```powershell
+.\.venv\Scripts\python.exe verify_matched_oracle.py
 .\.venv\Scripts\python.exe reproduce_final_evaluation.py
 ```
 
-This regenerates the complete 1,200-episode test from the frozen model, profile parameters, deterministic seeds, and implemented policies.
+The verified original environment produced **30 passing unit tests**. Replaying the 1,200 archived policy episodes yielded **zero mismatched episodes**, with reported maximum absolute numerical difference **1.110 × 10^-16**. Additional inference and oracle audits are preserved in the release evidence.
 
-For each episode, it compares recovery status and six numerical outcomes against the archived records.
+### 9.3. Cohort B: portable nine-policy runner
 
-**Verified acceptance result:**
-
-```text
-Episodes verified: 1200
-Numeric metrics per episode: 6
-Mismatched episodes: 0
-Maximum absolute error: 1.110e-16
-STEP 201: PASS
-```
-
-This result was reproduced using a separately created clean environment. Numerical equivalence is established for that environment, not guaranteed across arbitrary operating systems or future dependency versions.
-
-### Matched-oracle verification
+From the repository root, using the prepared environment:
 
 ```powershell
-.\.venv\Scripts\python.exe verify_matched_oracle.py
+.\.venv\Scripts\python.exe revision/run_portable_comparison.py --mode run
 ```
 
-The oracle-specific verification independently checks all 400 privileged-state episodes against the archived outcomes.
+This runner resolves its project inputs relative to the repository and creates new records under:
 
-## 8. Evaluation definitions
+```text
+results/reproduced_comparative_200/
+```
 
-**Recovery:** First qualifying entry into the regulated state interval followed by a continuous one-second residence. Unrecovered episodes receive the prescribed 12-second horizon for final recovery-time comparisons.
+It must **not** overwrite the authoritative frozen records under:
 
-**Stability:** Percentage of simulation samples within the regulated interval.
+```text
+revision/results/confirmatory_200/
+```
 
-**Stimulus variation:** Sum of absolute stimulus changes across control updates.
+The original full comparative run is preserved by `revision/run_confirmatory_comparison.py` and its historical lock. The portable runner has been checked against that implementation and archived episode results.
 
-**Adverse outcome:** An AI episode having slower recovery or lower regulated-state stability than its paired neutral episode.
+**Full verification outcome:** All **3,600/3,600** Cohort B episodes were regenerated with exact agreement for archived recovery and stability metrics, budget-related outcomes, controller-update values, and state/motion trajectory SHA-256 hashes. No frozen checkpoint was modified.
 
-**Opposite-direction action:** An intervention inconsistent with the corrective direction indicated by the true synthetic state.
+The verification evidence includes:
 
-**Reserve-boundary event:** An episode in which the admissible neutral-return variation allowance reaches its boundary.
+| Audit file | Verified purpose |
+|---|---|
+| `PORTABLE_COMPARATIVE_PREFLIGHT.json` | Portable runner agreement for all nine policies in representative cases |
+| `FULL_CANONICAL_REPRODUCTION_AUDIT.json` | **3,600/3,600** exact comparative episode reproductions |
+| `CANONICAL_B8_PARITY.json` | 120/120 donor trajectories, 400/400 deterministic selections, and 12 × 4,440 held-out feature/prediction comparisons |
+| `CANONICAL_RESERVE_SIMULATOR_PARITY.json` | 48 tested B5/B6 trajectory reproductions against frozen references |
+| `revision/configs/confirmatory_results_integrity_audit.json` | SHA-256 inventory and integrity verification for 200 archived comparative checkpoints |
+| `RELEASE_SHA256_MANIFEST.json` | File-level integrity manifest of the assembled release candidate |
 
-The true latent state is used by the simulator, matched oracle, and retrospective evaluation. It is not supplied to the motion-informed AI estimator.
+The full 3,600-episode replay—not the smaller 48-case module parity test—is the basis for the final comparative reproduction claim.
 
-## 9. Statistical methodology
+## 10. Figures and analytical provenance
 
-The independent statistical unit is the synthetic profile, not an individual window or control decision.
+Manuscript-ready figures and their underlying analysis evidence are stored in:
 
-Each profile contributes two initial-condition episodes. Policy effects are paired within the same profile and condition, with the two conditions grouped when computing overall profile effects.
+```text
+results/final_independent_evaluation/publication_figures_revised/
+results/final_independent_evaluation/publication_evidence/
+```
 
-The final analysis uses a 10,000-replicate profile-cluster bootstrap with seed 2026 and reports 95% confidence intervals.
+The comparative additions include PDF and PNG versions of:
 
-The bootstrap intervals are descriptive and do not represent familywise-adjusted inference for multiple endpoints.
+- **F10:** `F10_comparative_policy_performance_v2`
+- **F11:** `F11_condition_specific_policy_effects`
+- **F12:** `F12_neutral_return_reserve_ablation`
 
-## 10. Figures, tables, and provenance
+Additional archived figures document the framework architecture, causal motion windows, state trajectories, controller comparisons, intervention behavior, heterogeneity, and adverse outcomes.
 
-The final manuscript figure assets are archived under:
+**Figures and executable regeneration are separate claims.** The archive provides the figure files and associated numerical evidence, but it does not guarantee that every manuscript figure can be recreated from one supported command without additional historical script setup.
 
-`results/final_independent_evaluation/publication_figures_revised/`
+## 11. Data integrity and frozen provenance
 
-They include the motion-driven architecture, causal windows, representative trajectories, adverse-case illustration, primary controller comparisons, heterogeneity, intervention trade-offs, adverse-event summaries, and development information-source ablations.
+The principal frozen files include:
 
-Supporting tables, episode-level data, and figure provenance are preserved under:
+| File | Role |
+|---|---|
+| `results/frozen_one_second_ai_baseline/motion_time_unweighted.joblib` | Original motion-and-time estimator |
+| `revision/models/B2_time_only.joblib` | Time-only comparison model |
+| `revision/models/B3_motion_only.joblib` | Motion-only comparison model |
+| `revision/configs/comparative_protocol_lock.json` | Frozen comparative design and integrity declarations |
+| `revision/configs/confirmatory_profiles_200.csv` | Independent Cohort B profiles |
+| `revision/configs/confirmatory_episode_seeds.csv` | Exact 400-case paired seed ledger |
+| `revision/results/confirmatory_200/` | Original 200 profile checkpoint files |
+| `revision/configs/confirmatory_results_integrity_audit.json` | Checkpoint inventory and verification |
 
-`results/final_independent_evaluation/publication_evidence/`
+Selected frozen SHA-256 values:
 
-The package contains archived publication figures and their numerical evidence. A complete executable regeneration pipeline for every figure is not presently included; figure availability must not be confused with source-level figure regeneration.
+```text
+Principal motion-and-time model:
+1884007ac6581b6653c3227e464256b5ccc56c1e30acf847f543371312f36467
 
-## 11. Integrity and provenance
+Cohort B profiles:
+e2ab295d7adfafb0926947007d3cfa61541afb9d0c55c1f71df193f33aec5b23
 
-The authoritative independent evaluation protocol is:
+Cohort B seed ledger:
+05fe01c4d0cc28d272603c774a25ad811c77c1e14481d456295345c79a5f6143
 
-`results/final_independent_evaluation/locked_protocol.json`
+Full 3,600-episode reproduction audit:
+78ec617a43ee647bd8fe43f7b8203d5d9ce3ec1d5a38df13a28108bf51707617
+```
 
-The frozen model is:
+The original cohort protocol and results are preserved. Historical evidence locks have not been silently rewritten to fit the newer portable entry point. To verify the published release, use the manifest and the **exact version/tag** under examination; earlier release manifests do not necessarily describe later documentation edits.
 
-`results/frozen_one_second_ai_baseline/motion_time_unweighted.joblib`
+## 12. Limitations and claims boundary
 
-Frozen model SHA-256:
+The experimental findings are conditional on the **constructed stochastic dynamics, selected profile-generation procedures, model features, frozen estimator, action constraints, and outcome definitions**.
 
-`1884007ac6581b6653c3227e464256b5ccc56c1e30acf847f543371312f36467`
+In particular, this software does **not** demonstrate:
 
-Frozen protocol SHA-256:
+- A physiologically valid, user-specific latent state.
+- Stress, affect, attention, or emotion inference from measured human VR motion.
+- Performance with real participants, headsets, eye trackers, or physical intervention hardware.
+- Cross-device or cross-population generalization beyond the synthetic simulations.
+- Measured hardware energy efficiency, user safety, therapeutic benefit, or clinical efficacy.
+- Globally optimal control or uniformly superior behavior across profiles and initial conditions.
+- Unbiased state identification in the absence of synthetic motion–state coupling assumptions.
 
-`ba193b21e6e990489e395c91b72a8c0eabbba8a61af8f1c5165a52bb30df0008`
+The elapsed-time feature may act as a shortcut; the classifier probabilities were not established as calibrated estimates. The time-only, motion-only, and sham-motion controls address internal information dependence but cannot substitute for external measured-data validation. The two evaluation cohorts were separately generated, and their parameter sampling procedures are not presumed identical.
 
-The `STAGING_MANIFEST.json` retains the integrity records for the original publication-staging artifacts. Documentation and reproduction scripts added afterward are tracked by Git and are not part of that original staging manifest.
+The reserve rule establishes a specific **mathematical budget constraint**, not universal safety or recovery.
 
-The validated evaluation does not retrain the classifier or select controller parameters using the independent test results.
+## 13. Versioning, citation, and permanent archives
 
-## 12. Limitations
+The preceding release is preserved as:
 
-This release establishes computational reproducibility of the implemented synthetic experiment in the tested environment.
+- **GitHub v1.0.1:** [Verified Research Software Archive](https://github.com/AbdulRehman88/Multimodal-VR-Closed-Loop-Regulation/releases/tag/v1.0.1)
+- **Zenodo v1.0.1 version DOI:** [10.5281/zenodo.23999113](https://doi.org/10.5281/zenodo.23999113)
 
-It does **not** establish:
+**The v1.0.1 DOI refers to the earlier three-policy software archive.** It must not be presented as a permanent deposit containing this full nine-policy `v1.1.0` package.
 
-- Physiological validity of the synthetic latent state.
-- Human stress, emotion, or sensory-state measurement.
-- Transferability of the synthetic motion--state mapping to actual users.
-- Real-world VR deployment or clinical effectiveness.
-- Physical actuator cost or measured energy savings.
-- Global optimality or universal safety of the feedback policy.
+The version-specific DOI for **v1.1.0** should be added **only after** its GitHub release is tagged and Zenodo confirms the corresponding permanent deposit. Consult `CITATION.cff` for repository citation metadata, and cite the scientific article separately when available.
 
-The frozen estimator was trained on neutral-control trajectories; its probabilities were not calibrated, and elapsed time may encode information related to the simulated recovery schedule. These limitations constrain interpretation of the closed-loop findings.
+## 14. Contact and reproducibility questions
 
-## 13. License and citation
+**Maintainer:** Abdul Rehman  
+**GitHub:** [AbdulRehman88](https://github.com/AbdulRehman88)
 
-Original software in this repository is released under the MIT License. Third-party dependencies retain their respective licenses. The scientific manuscript, figures, and data should be cited using the corresponding research publication and archived release, as applicable.
-
-The citation metadata is supplied in `CITATION.cff`.
-
-A permanent Zenodo version-specific software DOI will be added after archival publication. No DOI is claimed before registration.
-
-## 14. Contact
-
-**Repository maintainer:** Abdul Rehman
-
-**GitHub:** https://github.com/AbdulRehman88
-
-For reproducibility questions, please open a GitHub issue with the operating system, Python version, reproduction command, and relevant error details.
+For reproduction issues, open a GitHub issue and include the operating system, Python version, exact command, relevant console output, and the Git commit or release tag being evaluated.
