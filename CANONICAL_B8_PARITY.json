@@ -1,0 +1,16 @@
+{
+  "step": 255,
+  "module": "src/controllers/sham_motion.py",
+  "module_sha256": "94c3f1af1a537b0e59302fbdae6e9fb71b6428bb6bb97d67f4a8cd3cfe0c5141",
+  "source_sha256": "c43bb4d50328e828ae1021078325e9879796b96e390384c3793658238c2185c9",
+  "training_data_sha256": "f4e5f898b66bba7cd1fe0f24d83c856a9a679d17e692e2913319bd02ba358797",
+  "frozen_model_sha256": "1884007ac6581b6653c3227e464256b5ccc56c1e30acf847f543371312f36467",
+  "donor_trajectories": 120,
+  "exact_donor_trajectory_matches": 120,
+  "episode_seeds_verified": 400,
+  "exact_donor_selection_matches": 400,
+  "prediction_donor_selections": 12,
+  "windows_per_prediction_test": 4440,
+  "feature_and_probability_parity": true,
+  "frozen_runner_unchanged": true
+}

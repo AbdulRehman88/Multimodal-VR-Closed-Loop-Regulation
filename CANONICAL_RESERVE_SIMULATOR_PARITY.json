@@ -1,0 +1,20 @@
+{
+  "step": 256,
+  "purpose": "byte_identical_reserve_configurable_simulator",
+  "canonical_module": "src/simulator/reserve_configurable.py",
+  "canonical_sha256": "01ebf2e0cc065a8df0a6a5fab94650298542f92714b6439949e3b25f1ff6f8fc",
+  "source_sha256": "01ebf2e0cc065a8df0a6a5fab94650298542f92714b6439949e3b25f1ff6f8fc",
+  "profiles_tested": 12,
+  "conditions_per_profile": 2,
+  "B5_cases": 24,
+  "B6_cases": 24,
+  "total_replays": 48,
+  "exact_reference_array_parity": true,
+  "exact_checkpoint_state_parity": true,
+  "exact_checkpoint_motion_parity": true,
+  "exact_checkpoint_stimulus_parity": true,
+  "per_update_limit_verified": true,
+  "total_variation_limit_verified": true,
+  "B6_return_reserve_verified": true,
+  "frozen_sources_modified": false
+}

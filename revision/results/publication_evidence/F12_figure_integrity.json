@@ -1,0 +1,41 @@
+{
+  "step": 247,
+  "figure": "F12_neutral_return_reserve_ablation",
+  "role": "secondary_reserve_ablation_and_posthoc_diagnostics",
+  "illustrative_episode": {
+    "profile": 200003,
+    "condition": "Low",
+    "episode_seed": 900000006,
+    "selection": "previously audited adverse B5 example",
+    "representative_random_selection": false,
+    "B5_state_sha256": "c655e8cdd815977dd0639140df95404b87dff7b920f06c410dd5b2f5eb1eba9a",
+    "B6_state_sha256": "54d293646960b55fa1004b0d65fec0ff8e7f8378b5dff5d813238b8e5e43ca9b",
+    "B5_variation": 0.6,
+    "B6_variation": 0.6
+  },
+  "aggregate_episodes_per_policy": 400,
+  "B5_counts": {
+    "Return capacity\nunavailable": 357,
+    "Post-recovery\nrelapse": 77,
+    "Final state\noutside interval": 90,
+    "Failed to\nrecover": 13
+  },
+  "B6_counts": {
+    "Return capacity\nunavailable": 0,
+    "Post-recovery\nrelapse": 0,
+    "Final state\noutside interval": 0,
+    "Failed to\nrecover": 0
+  },
+  "font": "Times New Roman Bold",
+  "dpi": 600,
+  "png_dimensions": [
+    10713,
+    5853
+  ],
+  "pdf_sha256": "85bb8e5e16545b92541faabce7267127b1652d6fc63baa91456fc14aca95e252",
+  "png_sha256": "5fffca4b16612ec6126e9b81b94478a9c46cd94383ff5fcc46f888223e7ca964",
+  "source_audit_sha256": "76a31abe9b8f6df5c60656e2f789afad99160801809013751d6eda7aff822b7d",
+  "source_relapse_audit_sha256": "2f6d6e37349551bdc0c48fbbf173aaae66ab6a950b74bcabc8e7ab268d03b264",
+  "frozen_results_modified": false,
+  "original_figures_modified": false
+}

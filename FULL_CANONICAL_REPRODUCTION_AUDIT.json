@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "profiles": 200,
+  "conditions": 2,
+  "policies": 9,
+  "episodes_exactly_reproduced": 3600,
+  "exact_metrics": true,
+  "exact_state_motion_hashes": true,
+  "exact_control_updates": true,
+  "frozen_checkpoint_inventory_sha256": "76a31abe9b8f6df5c60656e2f789afad99160801809013751d6eda7aff822b7d",
+  "portable_runner_sha256": "5b0708a7419f9956d45225de483df1e6b330a8beeb8fe261dd21bb7c2fb995bb"
+}

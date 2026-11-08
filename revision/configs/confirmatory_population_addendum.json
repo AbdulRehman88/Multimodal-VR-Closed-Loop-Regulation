@@ -1,0 +1,56 @@
+{
+  "step": 228,
+  "role": "Pre-evaluation population-provenance clarification",
+  "parent_protocol_sha256": "3d97a915e3a0fe62becda2ec6d423317680c3ece5daac7b2a9479bfc3a8c1b2c",
+  "legacy_simulator_used": false,
+  "original_profile_generator_recovered": false,
+  "population_definition": "Reconstructed independent uniform synthetic population",
+  "distribution_bounds": {
+    "baseline": [
+      4.5,
+      5.5
+    ],
+    "relaxation_rate": [
+      0.3,
+      0.8
+    ],
+    "stimulus_gain": [
+      0.5,
+      1.5
+    ],
+    "motion_frequency_hz": [
+      0.1,
+      0.5
+    ],
+    "motion_state_sensitivity": [
+      0.02,
+      0.15
+    ]
+  },
+  "basis": "Archived development and original independent-test profile parameter ranges and observed low correlations",
+  "scientific_limitation": "The archived samples support but cannot prove the original sampler used independent uniform draws. The new population is therefore documented explicitly rather than described as an exact historical reproduction.",
+  "parent_protocol_clarification": "The phrase 'Use original population generator' in the frozen Step 224 protocol is superseded solely for cohort-generation provenance. All policy, resource, endpoint and statistical rules remain fixed.",
+  "generator": "numpy.random.default_rng",
+  "generator_seed": 20261107,
+  "sampling_order": [
+    "baseline",
+    "relaxation_rate",
+    "stimulus_gain",
+    "motion_frequency_hz",
+    "motion_state_sensitivity"
+  ],
+  "profiles": 200,
+  "profile_ids": [
+    200000,
+    200199
+  ],
+  "initial_states": {
+    "Low": 2.0,
+    "Elevated": 8.0
+  },
+  "paired_seeds": "900000000 + 2*(profile-200000) + condition_offset",
+  "profile_csv_sha256": "e2ab295d7adfafb0926947007d3cfa61541afb9d0c55c1f71df193f33aec5b23",
+  "episode_ledger_sha256": "05fe01c4d0cc28d272603c774a25ad811c77c1e14481d456295345c79a5f6143",
+  "all_policy_outcomes_unexamined": true,
+  "post_evaluation_sampling_tuning_allowed": false
+}

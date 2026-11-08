@@ -1,0 +1,24 @@
+{
+  "step": 258,
+  "portable_runner": "revision/run_portable_comparison.py",
+  "portable_runner_sha256": "5b0708a7419f9956d45225de483df1e6b330a8beeb8fe261dd21bb7c2fb995bb",
+  "source_runner_sha256": "a9a1d6e5b94ac30789f55e87b2306c61fda2a14a11215a0d0e14fd4e4e3923e1",
+  "evaluated_profiles": 2,
+  "evaluated_conditions": 4,
+  "evaluated_policy_episodes": 36,
+  "policies": [
+    "B0",
+    "B1",
+    "B2",
+    "B3",
+    "B4",
+    "B5",
+    "B6",
+    "B7",
+    "B8"
+  ],
+  "exact_archived_metric_parity": true,
+  "exact_state_motion_hash_parity": true,
+  "exact_action_parity": true,
+  "frozen_checkpoints_modified": false
+}

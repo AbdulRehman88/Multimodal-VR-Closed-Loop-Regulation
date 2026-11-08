@@ -1,0 +1,36 @@
+{
+  "step": 221,
+  "training_data_sha256": "f4e5f898b66bba7cd1fe0f24d83c856a9a679d17e692e2913319bd02ba358797",
+  "B1": {
+    "policy": "fixed_schedule",
+    "cycle_seconds": 4,
+    "one_second_phases": [
+      "increase",
+      "neutral",
+      "decrease",
+      "neutral"
+    ],
+    "motion_used": false,
+    "hidden_state_used": false,
+    "initial_condition_used": false
+  },
+  "B4": {
+    "policy": "single_feature_threshold",
+    "feature": "speed_std",
+    "regulated_median": 0.0010848980713914417,
+    "low_median": 0.0020686602033797028,
+    "elevated_median": 0.004803952760360003,
+    "regulated_low_threshold": 0.0015767791373855723,
+    "low_elevated_threshold": 0.0034363064818698527,
+    "elapsed_time_used": false,
+    "threshold_source": "training_class_median_midpoints"
+  },
+  "shared_constraints": {
+    "sampling_hz": 90,
+    "control_hz": 10,
+    "first_control_s": 1.0,
+    "max_update_change": 0.05,
+    "variation_budget": 0.6,
+    "neutral_return_reserve": true
+  }
+}

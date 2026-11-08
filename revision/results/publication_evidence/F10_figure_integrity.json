@@ -1,0 +1,57 @@
+{
+  "step": 244,
+  "figure": "F10_comparative_policy_performance",
+  "scientific_scope": "new_independent_200_profile_cohort",
+  "panels": {
+    "A": "Mean recovery and profile-cluster bootstrap 95% CI",
+    "B": "Actual cumulative stimulus variation and 95% CI",
+    "C": "Paired B6-minus-comparator recovery improvement"
+  },
+  "policy_names": {
+    "B0": "Neutral",
+    "B1": "Fixed schedule",
+    "B2": "Time-only LR",
+    "B3": "Motion-only LR",
+    "B4": "Motion threshold",
+    "B5": "AI without reserve",
+    "B6": "Proposed AI + reserve",
+    "B7": "Privileged-state oracle",
+    "B8": "Sham motion"
+  },
+  "policy_colors": {
+    "B0": "#727B86",
+    "B1": "#9B8790",
+    "B2": "#B76A49",
+    "B3": "#5485AC",
+    "B4": "#718EAA",
+    "B5": "#B24B50",
+    "B6": "#24618E",
+    "B7": "#30836D",
+    "B8": "#8A7795"
+  },
+  "font_family": "Times New Roman",
+  "reference_embedded_fonts": [
+    "TimesNewRomanPS-BoldMT"
+  ],
+  "output_embedded_fonts": [
+    "TimesNewRomanPS-BoldMT"
+  ],
+  "font_style": "bold",
+  "base_font_size_pt": 12,
+  "figure_title_size_pt": 16,
+  "png_dpi": 600,
+  "png_dimensions": [
+    10989,
+    4989
+  ],
+  "bootstrap_replicates": 10000,
+  "independent_profiles": 200,
+  "original_results_changed": false,
+  "original_figures_changed": false,
+  "pdf_path": "D:\\Dr_Abdul_Rehman\\Multimodal-VR\\results\\final_independent_evaluation\\publication_figures_revised\\F10_comparative_policy_performance.pdf",
+  "png_path": "D:\\Dr_Abdul_Rehman\\Multimodal-VR\\results\\final_independent_evaluation\\publication_figures_revised\\F10_comparative_policy_performance.png",
+  "pdf_sha256": "79f8f720a41eea6c8529b2b1510669727465efd5b970b348c8138c1b9161c2d4",
+  "png_sha256": "0ba4ae6333eb345e60b1f530e45f028de35542cee7b481e38193a0fd9028b863",
+  "source_statistical_manifest_sha256": "6a9685ea20bd0261a213b300a9b5df739bac93753a028a58af161e2003076ce4",
+  "source_audit_sha256": "76a31abe9b8f6df5c60656e2f789afad99160801809013751d6eda7aff822b7d"
+}

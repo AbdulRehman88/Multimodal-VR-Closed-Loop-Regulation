@@ -1,0 +1,49 @@
+{
+  "step": 235,
+  "status": "PASS",
+  "original_audit_sha256": "76a31abe9b8f6df5c60656e2f789afad99160801809013751d6eda7aff822b7d",
+  "population": "reconstructed_independent_uniform_synthetic",
+  "independent_profiles": 200,
+  "paired_conditions": [
+    "Low",
+    "Elevated"
+  ],
+  "total_policy_episodes": 3600,
+  "primary_comparators": [
+    "B1",
+    "B2",
+    "B3",
+    "B4"
+  ],
+  "secondary_comparators": [
+    "B0",
+    "B5",
+    "B7",
+    "B8"
+  ],
+  "primary_endpoints": [
+    "recovery_s",
+    "stability_pct"
+  ],
+  "effect_direction": "positive_favors_B6",
+  "paired_unit": "profile_mean_across_two_conditions",
+  "bootstrap_replicates": 10000,
+  "bootstrap_seed": 2026,
+  "bootstrap_method": "profile_cluster_percentile",
+  "permutation_replicates": 100000,
+  "permutation_seed": 2027,
+  "permutation_method": "two_sided_profile_sign_flip",
+  "permutation_pvalue_correction": "plus_one",
+  "multiple_testing": "Holm_eight_primary_tests",
+  "secondary_inference": "descriptive_unadjusted_CI",
+  "nonrecovery_handling": "12_second_horizon",
+  "B5_without_reserved_neutral_return_capacity": 357,
+  "checkpoint_hashes_verified": 200,
+  "outputs": {
+    "primary_holm_comparisons.csv": "09eb9bf19503b4d75e76a9d1f778f803b5a9c491b1de481caa86e2e1dc182d9f",
+    "secondary_bootstrap_comparisons.csv": "54409da9f90ce2a6e4285208ac08e22f9af736f35d581ea2b89137a17e0a2ae9",
+    "policy_summary.csv": "43cfd2e686f9a7ce232c28906de2c537408f502b9b0f1a8bdc0a8866608dc876",
+    "policy_summary_by_condition.csv": "9e4c8790d6b3f6d6af9e26091a989d76f22c25c3cb1eebda23e0adfdba5904b3",
+    "paired_adverse_outcomes.csv": "d7c8c16f7dcc0ab5b60641b1be9c51f07e1041c57ea938683b30c3cb8a90f71e"
+  }
+}

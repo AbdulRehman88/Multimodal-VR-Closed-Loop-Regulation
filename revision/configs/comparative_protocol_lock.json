@@ -1,0 +1,91 @@
+{
+  "protocol": "Comparative Revision - Independent Confirmatory Simulation",
+  "version": "2.0-preconfirmatory",
+  "original_release": "10.5281/zenodo.23999113",
+  "status": "frozen_before_new_confirmatory_evaluation",
+  "policies": {
+    "B0": "neutral",
+    "B1": "fixed_schedule",
+    "B2": "time_only_logistic_regression",
+    "B3": "motion_only_logistic_regression",
+    "B4": "single_feature_motion_threshold",
+    "B5": "motion_time_AI_without_neutral_return_reserve",
+    "B6": "original_frozen_reserved_AI",
+    "B7": "matched_reserved_privileged_state_oracle",
+    "B8": "time_preserved_sham_motion_diagnostic"
+  },
+  "simulation": {
+    "sampling_hz": 90,
+    "duration_s": 12,
+    "control_hz": 10,
+    "first_action_s": 1.0,
+    "conditions": {
+      "Low": 2.0,
+      "Elevated": 8.0
+    },
+    "maximum_update_change": 0.05,
+    "maximum_total_variation": 0.6,
+    "neutral": 0.5,
+    "reserve_enabled": "All adaptive policies except B5"
+  },
+  "new_cohort": {
+    "profiles": 200,
+    "episodes_per_policy": 400,
+    "generation": "Use original population generator with new independent random seed",
+    "selection_after_outcome_inspection": false
+  },
+  "primary_endpoints": [
+    "recovery_time_s",
+    "state_stability_pct"
+  ],
+  "primary_confirmatory_contrasts": [
+    "B6_minus_B1",
+    "B6_minus_B2",
+    "B6_minus_B3",
+    "B6_minus_B4"
+  ],
+  "secondary_contrasts": [
+    "B6_minus_B0",
+    "B6_minus_B7",
+    "B6_minus_B5",
+    "B6_minus_B8"
+  ],
+  "statistics": {
+    "independent_unit": "synthetic_profile",
+    "paired_conditions": [
+      "Low",
+      "Elevated"
+    ],
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 2026,
+    "confidence_intervals": "95% profile-cluster percentile",
+    "primary_multiplicity": "Holm correction across 8 endpoint-by-comparator tests",
+    "unfavorable_outcomes_retained": true,
+    "nonrecovery_time_s": 12.0
+  },
+  "training_dataset_sha256": "f4e5f898b66bba7cd1fe0f24d83c856a9a679d17e692e2913319bd02ba358797",
+  "artifact_sha256": {
+    "src/simulator/ai_closed_loop.py": "6faebd1c0d656a0c37ae851a403eaebb27067da776b9c51a9dc02add2c2fe7aa",
+    "src/simulator/dynamics.py": "54419e2243ee181e184febb25fb3c24db059e74c490aa3be0d39e3bc1a74b5e0",
+    "src/simulator/motion.py": "6e4f4b265c862e4dc6c525f81a58b94461660a638adc5af0d933037830eea45b",
+    "src/models/online_motion_features.py": "1556857fd74f3e1c03539ce5bee4e38a0915d5fd38e841013f1f5e45a498fa51",
+    "src/models/causal_features.py": "5da9af22d81680277c8a6319c6438d693f9cf0dd4b7e0f800e0ae1bb03ceebd2",
+    "src/evaluation/control_metrics.py": "b110f4307c97cdf9c4a3ff5b8a0aacb73f9369a3453d9f48bff2ab4f892d9a66",
+    "results/frozen_one_second_ai_baseline/motion_time_unweighted.joblib": "1884007ac6581b6653c3227e464256b5ccc56c1e30acf847f543371312f36467",
+    "revision/models/B2_time_only.joblib": "21630fa2246541d2a7879b503b2240bdc7c3d806c3918181ac3c95a7f910e760",
+    "revision/models/B3_motion_only.joblib": "867466ef2fce36cf90420f947598ecec1ca5e56a0541886c7c6655bbcfe7e6a4",
+    "revision/models/B2_time_only_manifest.json": "93535576c6326c4f44c544bb6bc4550b580ffa279577e66735761a73feb56fba",
+    "revision/models/B3_motion_only_manifest.json": "d520c07bdf3376e6e1b91a43dde275822e935cde83dd49b11d4847be034e048a",
+    "revision/baseline_policies.py": "031daf15d441af1dbc5df3286379fd62a7c125a10484bb8a1184afa0bf9bc2df",
+    "revision/simulator_B5_budget_only.py": "01ebf2e0cc065a8df0a6a5fab94650298542f92714b6439949e3b25f1ff6f8fc",
+    "revision/implement_sham_motion.py": "c43bb4d50328e828ae1021078325e9879796b96e390384c3793658238c2185c9",
+    "revision/configs/B1_B4_frozen_protocol.json": "72ce8021d109442a2774f524f48b0c44f79202665eda8e491aa4c0abb2a49e23",
+    "revision/configs/B8_sham_motion_protocol.json": "99c53c8d6f88d877684ffdecc9870a26af29b99be3cf4effcd5fc2188d33c36c"
+  },
+  "integrity": {
+    "original_release_unchanged": true,
+    "original_AI_model_unchanged": true,
+    "no_confirmatory_cohort_inspected": true,
+    "no_post_confirmatory_tuning": true
+  }
+}

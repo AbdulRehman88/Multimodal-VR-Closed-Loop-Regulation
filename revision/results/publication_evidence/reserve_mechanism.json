@@ -1,0 +1,41 @@
+{
+  "analysis_role": "reserve_ablation_and_posthoc_diagnostics",
+  "B5": {
+    "episodes": 400,
+    "recovered_count": 387,
+    "relapsed_after_qualifying_window_count": 77,
+    "final_state_outside_count": 90,
+    "final_3s_stability_mean_pct": 78.42685185185185,
+    "opposite_boundary_overshoot_count": 77
+  },
+  "B6": {
+    "episodes": 400,
+    "recovered_count": 400,
+    "relapsed_after_qualifying_window_count": 0,
+    "final_state_outside_count": 0,
+    "final_3s_stability_mean_pct": 100.0,
+    "opposite_boundary_overshoot_count": 0
+  },
+  "resource_parity": {
+    "equal_total_variation": 400,
+    "identical_action_trajectories": 35,
+    "different_action_trajectories": 365,
+    "max_total_variation_difference": 2.220446049250313e-16
+  },
+  "exploratory_final_3s_stability": {
+    "mean_difference_pp": 21.57314814814815,
+    "profile_cluster_bootstrap_CI_95": [
+      17.27388888888889,
+      26.070509259259257
+    ],
+    "bootstrap_replicates": 10000,
+    "independent_profiles": 200
+  },
+  "neutral_return_capacity_failures_B5": 357,
+  "interpretation_limits": [
+    "Return capacity is not actual terminal neutrality",
+    "Late-window stability and relapse are post hoc diagnostics",
+    "All findings concern simulated latent states",
+    "Equal variation does not imply equal intervention trajectories"
+  ]
+}

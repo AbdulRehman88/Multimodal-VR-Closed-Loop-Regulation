@@ -1,0 +1,120 @@
+{
+  "figure": "F11_condition_specific_policy_effects",
+  "step": 246,
+  "scientific_role": "secondary_condition_specific",
+  "comparison": "comparator_recovery_minus_B6_recovery",
+  "positive_direction": "favors_B6",
+  "interaction": "Elevated_improvement_minus_Low_improvement",
+  "independent_profiles": 200,
+  "paired_conditions": [
+    "Low",
+    "Elevated"
+  ],
+  "bootstrap_replicates": 10000,
+  "bootstrap_seed": 2026,
+  "font": "Times New Roman Bold",
+  "dpi": 600,
+  "png_dimensions": [
+    11013,
+    4053
+  ],
+  "effects": {
+    "B1": {
+      "Low": {
+        "mean": -0.04877777777777778,
+        "CI95": [
+          -0.07972222222222221,
+          -0.02166666666666667
+        ]
+      },
+      "Elevated": {
+        "mean": 0.5555,
+        "CI95": [
+          0.4864430555555555,
+          0.6261694444444443
+        ]
+      },
+      "Interaction": {
+        "mean": 0.6042777777777778,
+        "CI95": [
+          0.5242194444444445,
+          0.6858902777777778
+        ]
+      }
+    },
+    "B2": {
+      "Low": {
+        "mean": -0.03205555555555555,
+        "CI95": [
+          -0.062390277777777774,
+          -0.005388888888888893
+        ]
+      },
+      "Elevated": {
+        "mean": 0.5206111111111111,
+        "CI95": [
+          0.45399583333333327,
+          0.5894444444444444
+        ]
+      },
+      "Interaction": {
+        "mean": 0.5526666666666666,
+        "CI95": [
+          0.4753833333333333,
+          0.6305569444444444
+        ]
+      }
+    },
+    "B3": {
+      "Low": {
+        "mean": 0.23394444444444443,
+        "CI95": [
+          0.2015555555555556,
+          0.2672222222222222
+        ]
+      },
+      "Elevated": {
+        "mean": -0.047111111111111104,
+        "CI95": [
+          -0.07344583333333332,
+          -0.0222763888888889
+        ]
+      },
+      "Interaction": {
+        "mean": -0.28105555555555556,
+        "CI95": [
+          -0.3237222222222222,
+          -0.23816666666666667
+        ]
+      }
+    },
+    "B4": {
+      "Low": {
+        "mean": 0.11572222222222223,
+        "CI95": [
+          0.07283333333333332,
+          0.15855555555555553
+        ]
+      },
+      "Elevated": {
+        "mean": 0.0976111111111111,
+        "CI95": [
+          0.035775000000000015,
+          0.17205694444444442
+        ]
+      },
+      "Interaction": {
+        "mean": -0.018111111111111106,
+        "CI95": [
+          -0.09255833333333331,
+          0.06411111111111109
+        ]
+      }
+    }
+  },
+  "pdf_sha256": "ec851c99e4eeac4d72f5eb63cbc82504607c18f835a662a231550db08071d871",
+  "png_sha256": "83ad60e0ba2c9656859330969233c7e8730b4ec0cafd2ffdba3609836671d2b0",
+  "source_audit_sha256": "76a31abe9b8f6df5c60656e2f789afad99160801809013751d6eda7aff822b7d",
+  "source_interaction_audit_sha256": "fe3b814014aa94d4aa62a170b4783970a5c53aebcee52233bd3210b52a609127",
+  "existing_figures_unchanged": true
+}

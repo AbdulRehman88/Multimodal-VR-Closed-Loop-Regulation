@@ -1,0 +1,23 @@
+{
+  "step": 240,
+  "status": "PASS",
+  "source_sha256": {
+    "statistics": "6a9685ea20bd0261a213b300a9b5df739bac93753a028a58af161e2003076ce4",
+    "endpoint_dependence": "fe3b814014aa94d4aa62a170b4783970a5c53aebcee52233bd3210b52a609127",
+    "post_recovery": "2f6d6e37349551bdc0c48fbbf173aaae66ab6a950b74bcabc8e7ab268d03b264"
+  },
+  "primary_effectiveness_presentation": "recovery_s",
+  "stability_interpretation": "Distinct definition but algebraically linked to recovery for B0-B4 and B6-B8 in this cohort",
+  "primary_inference": "Original Holm-adjusted eight-test results preserved; no new p-value correction applied",
+  "condition_interactions": "secondary",
+  "relapse_and_late_stability": "posthoc",
+  "population": "reconstructed_distribution_matched_synthetic",
+  "source_simulations_modified": false,
+  "files": {
+    "reserve_mechanism.json": "09c20cbb52800e3b7e634730505815713819030c1637e1de7279363f37e62f13",
+    "table_condition_interactions.csv": "ec3d62028594279403240ce406705cbed7a7cb1a92b32a5b39a2a2f7e4c4f7bf",
+    "table_policy_summary.csv": "43cfd2e686f9a7ce232c28906de2c537408f502b9b0f1a8bdc0a8866608dc876",
+    "table_primary_recovery.csv": "a3bc19aee1a5c8317fa8c42452d0a254a53000c42d8d322195b87b6789330b94",
+    "table_secondary_comparisons.csv": "54409da9f90ce2a6e4285208ac08e22f9af736f35d581ea2b89137a17e0a2ae9"
+  }
+}

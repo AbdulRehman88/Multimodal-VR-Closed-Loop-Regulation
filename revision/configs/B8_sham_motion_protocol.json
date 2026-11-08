@@ -1,0 +1,29 @@
+{
+  "step": 223,
+  "baseline": "B8_time_preserved_sham_motion",
+  "purpose": "current_trajectory_motion_information_falsification",
+  "source": "D:\\Dr_Abdul_Rehman\\Multimodal-VR\\results\\motion_state_dataset\\development_windows.csv",
+  "training_data_sha256": "f4e5f898b66bba7cd1fe0f24d83c856a9a679d17e692e2913319bd02ba358797",
+  "frozen_model_sha256": "1884007ac6581b6653c3227e464256b5ccc56c1e30acf847f543371312f36467",
+  "donor_split": "train_only",
+  "donor_profiles": 60,
+  "donor_trajectories": 120,
+  "donor_conditions": [
+    "Low",
+    "Elevated"
+  ],
+  "donor_selection": "SHA256(sham-motion-v1|episode_seed), modulo 120",
+  "donor_selection_independent_of_current_state": true,
+  "recipient_motion_used": false,
+  "recipient_elapsed_time_preserved": true,
+  "donor_temporal_sequence_preserved": true,
+  "donor_true_state_used_for_matching": false,
+  "observation_window_samples": 90,
+  "control_frequency_hz": 10,
+  "first_feedback_time_s": 1.0,
+  "variation_budget": 0.6,
+  "maximum_update_change": 0.05,
+  "neutral_return_reserve": true,
+  "comparison": "B6_genuine_motion_time",
+  "diagnostic_only": true
+}

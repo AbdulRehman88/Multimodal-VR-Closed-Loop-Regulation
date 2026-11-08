@@ -1,0 +1,58 @@
+{
+  "baseline": "B3_motion_only",
+  "role": "supplementary_information_ablation",
+  "training_data": "D:\\Dr_Abdul_Rehman\\Multimodal-VR\\results\\motion_state_dataset\\development_windows.csv",
+  "training_data_sha256": "f4e5f898b66bba7cd1fe0f24d83c856a9a679d17e692e2913319bd02ba358797",
+  "training_profiles": 60,
+  "training_windows": 13320,
+  "validation_profiles": 20,
+  "validation_windows": 4440,
+  "validation_used_for_fitting": false,
+  "independent_test_used": false,
+  "features": [
+    "speed_mean",
+    "speed_std",
+    "speed_max",
+    "speed_q90",
+    "speed_rms",
+    "acceleration_mean",
+    "acceleration_std",
+    "acceleration_q90",
+    "velocity_x_std",
+    "velocity_y_std",
+    "velocity_z_std",
+    "position_x_std",
+    "position_y_std",
+    "position_z_std"
+  ],
+  "feature_count": 14,
+  "labels": {
+    "0": "state < 4",
+    "1": "4 <= state <= 6",
+    "2": "state > 6"
+  },
+  "classifier": "StandardScaler + LogisticRegression",
+  "C": 1.0,
+  "class_weight": null,
+  "random_state": 2026,
+  "max_iter": 1000,
+  "validation_balanced_accuracy": 0.5681357118609355,
+  "validation_confusion_matrix": [
+    [
+      12,
+      221,
+      8
+    ],
+    [
+      4,
+      3881,
+      59
+    ],
+    [
+      8,
+      76,
+      171
+    ]
+  ],
+  "model_sha256": "867466ef2fce36cf90420f947598ecec1ca5e56a0541886c7c6655bbcfe7e6a4"
+}

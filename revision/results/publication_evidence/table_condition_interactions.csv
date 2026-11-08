@@ -1,0 +1,5 @@
+comparator,endpoint,low_mean_improvement,elevated_mean_improvement,elevated_minus_low,interaction_CI_low,interaction_CI_high,role,analysis_role
+B1,recovery_s,-0.048777777777777781,0.55549999999999999,0.6042777777777778,0.52421944444444446,0.68589027777777778,secondary_descriptive,secondary_condition_interaction
+B2,recovery_s,-0.032055555555555552,0.52061111111111114,0.55266666666666664,0.47538333333333332,0.63055694444444443,secondary_descriptive,secondary_condition_interaction
+B3,recovery_s,0.23394444444444443,-0.047111111111111104,-0.28105555555555556,-0.32372222222222219,-0.23816666666666667,secondary_descriptive,secondary_condition_interaction
+B4,recovery_s,0.11572222222222223,0.097611111111111107,-0.018111111111111106,-0.092558333333333312,0.064111111111111091,secondary_descriptive,secondary_condition_interaction
